@@ -1,3 +1,4 @@
+tag: mrl
 dataset_path: mrlbenchmarks/global-piqa-nonparallel
 output_type: multiple_choice
 test_split: test
