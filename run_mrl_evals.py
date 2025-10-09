@@ -283,26 +283,57 @@ def has_results(model: str, output_path: str) -> bool:
     return False
 
 
+def save_failed_model_incremental(result: dict[str, str], output_path: str):
+    """Incrementally append a failed model to the failure tracking files.
+
+    This function is called immediately when a model fails, ensuring the failure
+    is recorded even if the script crashes or is interrupted.
+
+    Args:
+        result: The result dictionary for a failed model
+        output_path: Base output directory
+    """
+    if result["status"] == "success":
+        return  # Only save failures
+
+    output_dir = Path(output_path)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    # Append to simple text file with just model name
+    failed_txt = output_dir / "failed_models.txt"
+    with open(failed_txt, "a") as f:
+        f.write(f"{result['model']}\n")
+        f.flush()  # Ensure it's written to disk immediately
+
+    # For JSON, we need to read, append, and rewrite the entire file
+    failed_json = output_dir / "failed_models.json"
+    failed_results = []
+
+    # Read existing failures if file exists
+    if failed_json.exists():
+        try:
+            with open(failed_json, "r") as f:
+                failed_results = json.load(f)
+        except (json.JSONDecodeError, FileNotFoundError):
+            failed_results = []
+
+    # Append new failure and write back
+    failed_results.append(result)
+    with open(failed_json, "w") as f:
+        json.dump(failed_results, f, indent=2)
+        f.flush()  # Ensure it's written to disk immediately
+
+
 def save_failed_models(results: list[dict[str, str]], output_path: str):
-    """Save failed models to both text and JSON files for later debugging."""
+    """Print summary of failed models (actual saving happens incrementally now)."""
     failed_results = [r for r in results if r["status"] != "success"]
 
     if not failed_results:
         return
 
     output_dir = Path(output_path)
-    output_dir.mkdir(parents=True, exist_ok=True)
-
-    # Save simple text file with just model names
     failed_txt = output_dir / "failed_models.txt"
-    with open(failed_txt, "w") as f:
-        for r in failed_results:
-            f.write(f"{r['model']}\n")
-
-    # Save detailed JSON file with full error information
     failed_json = output_dir / "failed_models.json"
-    with open(failed_json, "w") as f:
-        json.dump(failed_results, f, indent=2)
 
     print("\n📝 Failed models saved to:")
     print(f"   - {failed_txt} (simple list)")
@@ -330,6 +361,7 @@ def gpu_worker(
     results: list[dict[str, Any]],
     results_lock: threading.Lock,
     pbar: tqdm,
+    output_path: str,
 ):
     """Worker function that processes models from a queue on a specific GPU.
 
@@ -339,6 +371,7 @@ def gpu_worker(
         results: Shared list to store results (protected by results_lock)
         results_lock: Lock for thread-safe access to results list
         pbar: Progress bar to update
+        output_path: Output path for saving failed models incrementally
     """
     success_count = 0
     failed_count = 0
@@ -355,13 +388,15 @@ def gpu_worker(
             # Run evaluation on this GPU
             result = run_evaluation(model, gpu_id)
 
-            # Thread-safe append to results
+            # Thread-safe append to results and save failures immediately
             with results_lock:
                 results.append(result)
                 if result["status"] == "success":
                     success_count += 1
                 else:
                     failed_count += 1
+                    # Save failed model immediately to disk
+                    save_failed_model_incremental(result, output_path)
 
                 # Update progress bar
                 pbar.set_postfix(
@@ -375,16 +410,17 @@ def gpu_worker(
         except Exception as e:
             print(f"[GPU {gpu_id}] Unexpected error processing {model}: {e}")
             with results_lock:
-                results.append(
-                    {
-                        "model": model,
-                        "gpu_id": gpu_id,
-                        "status": "exception",
-                        "error": str(e),
-                        "timestamp": datetime.now().isoformat(),
-                    }
-                )
+                result = {
+                    "model": model,
+                    "gpu_id": gpu_id,
+                    "status": "exception",
+                    "error": str(e),
+                    "timestamp": datetime.now().isoformat(),
+                }
+                results.append(result)
                 failed_count += 1
+                # Save failed model immediately to disk
+                save_failed_model_incremental(result, output_path)
                 pbar.update(1)
         finally:
             # Mark task as done
@@ -445,6 +481,17 @@ def main():
         print("No models to evaluate. Exiting.")
         return 0
 
+    # Clear previous failure tracking files to start fresh
+    # (Incremental saving will recreate them as failures occur)
+    output_dir = Path(OUTPUT_PATH)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    failed_txt = output_dir / "failed_models.txt"
+    failed_json = output_dir / "failed_models.json"
+    if failed_txt.exists():
+        failed_txt.unlink()
+    if failed_json.exists():
+        failed_json.unlink()
+
     # Create a queue and populate it with models
     model_queue = queue.Queue()
     for model in models_to_run:
@@ -461,7 +508,13 @@ def main():
             # Submit one worker per GPU
             futures = [
                 executor.submit(
-                    gpu_worker, gpu_id, model_queue, results, results_lock, pbar
+                    gpu_worker,
+                    gpu_id,
+                    model_queue,
+                    results,
+                    results_lock,
+                    pbar,
+                    OUTPUT_PATH,
                 )
                 for gpu_id in range(NUM_GPUS)
             ]
