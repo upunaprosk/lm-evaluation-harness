@@ -1,0 +1,3 @@
+include: '_template'
+task: mrl_gen_tgl_latn
+dataset_name: tgl_latn

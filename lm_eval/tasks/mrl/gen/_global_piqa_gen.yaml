@@ -1,0 +1,202 @@
+group: global_piqa_gen
+task:
+  - task: mrl_gen_acq_arab
+    task_alias: acq_arab
+  - task: mrl_gen_aeb_arab
+    task_alias: aeb_arab
+  - task: mrl_gen_afb_arab
+    task_alias: afb_arab
+  - task: mrl_gen_als_latn
+    task_alias: als_latn
+  - task: mrl_gen_amh_ethi
+    task_alias: amh_ethi
+  - task: mrl_gen_apc_arab_jord
+    task_alias: apc_arab_jord
+  - task: mrl_gen_apc_arab_leba
+    task_alias: apc_arab_leba
+  - task: mrl_gen_apc_arab_pale
+    task_alias: apc_arab_pale
+  - task: mrl_gen_apc_arab_syri
+    task_alias: apc_arab_syri
+  - task: mrl_gen_arb_arab
+    task_alias: arb_arab
+  - task: mrl_gen_arq_arab
+    task_alias: arq_arab
+  - task: mrl_gen_ars_arab
+    task_alias: ars_arab
+  - task: mrl_gen_ary_arab
+    task_alias: ary_arab
+  - task: mrl_gen_arz_arab
+    task_alias: arz_arab
+  - task: mrl_gen_azj_latn
+    task_alias: azj_latn
+  - task: mrl_gen_bam_latn
+    task_alias: bam_latn
+  - task: mrl_gen_bel_cyrl
+    task_alias: bel_cyrl
+  - task: mrl_gen_ben_latn
+    task_alias: ben_latn
+  - task: mrl_gen_bho_deva
+    task_alias: bho_deva
+  - task: mrl_gen_bsk_arab
+    task_alias: bsk_arab
+  - task: mrl_gen_bul_cyrl
+    task_alias: bul_cyrl
+  - task: mrl_gen_cat_latn
+    task_alias: cat_latn
+  - task: mrl_gen_ces_latn
+    task_alias: ces_latn
+  - task: mrl_gen_ckb_arab
+    task_alias: ckb_arab
+  - task: mrl_gen_ckm_latn
+    task_alias: ckm_latn
+  - task: mrl_gen_cmn_hans
+    task_alias: cmn_hans
+  - task: mrl_gen_cmn_hant
+    task_alias: cmn_hant
+  - task: mrl_gen_dhd_deva
+    task_alias: dhd_deva
+  - task: mrl_gen_ell_grek
+    task_alias: ell_grek
+  - task: mrl_gen_eng_latn
+    task_alias: eng_latn
+  - task: mrl_gen_est_latn
+    task_alias: est_latn
+  - task: mrl_gen_fao_latn
+    task_alias: fao_latn
+  - task: mrl_gen_fin_latn
+    task_alias: fin_latn
+  - task: mrl_gen_fra_latn_cana
+    task_alias: fra_latn_cana
+  - task: mrl_gen_fra_latn_fran
+    task_alias: fra_latn_fran
+  - task: mrl_gen_glg_latn
+    task_alias: glg_latn
+  - task: mrl_gen_guj_gujr
+    task_alias: guj_gujr
+  - task: mrl_gen_hau_latn
+    task_alias: hau_latn
+  - task: mrl_gen_haw_latn
+    task_alias: haw_latn
+  - task: mrl_gen_heb_hebr
+    task_alias: heb_hebr
+  - task: mrl_gen_hrv_latn
+    task_alias: hrv_latn
+  - task: mrl_gen_hun_latn
+    task_alias: hun_latn
+  - task: mrl_gen_hye_armn
+    task_alias: hye_armn
+  - task: mrl_gen_ibo_latn
+    task_alias: ibo_latn
+  - task: mrl_gen_idu_latn
+    task_alias: idu_latn
+  - task: mrl_gen_ind_latn
+    task_alias: ind_latn
+  - task: mrl_gen_isl_latn
+    task_alias: isl_latn
+  - task: mrl_gen_iso_latn
+    task_alias: iso_latn
+  - task: mrl_gen_ita_latn
+    task_alias: ita_latn
+  - task: mrl_gen_jav_latn
+    task_alias: jav_latn
+  - task: mrl_gen_jpn_jpan
+    task_alias: jpn_jpan
+  - task: mrl_gen_kat_geor
+    task_alias: kat_geor
+  - task: mrl_gen_kaz_cyrl
+    task_alias: kaz_cyrl
+  - task: mrl_gen_kir_cyrl
+    task_alias: kir_cyrl
+  - task: mrl_gen_kor_hang
+    task_alias: kor_hang
+  - task: mrl_gen_lit_latn
+    task_alias: lit_latn
+  - task: mrl_gen_mar_deva
+    task_alias: mar_deva
+  - task: mrl_gen_mkd_cyrl
+    task_alias: mkd_cyrl
+  - task: mrl_gen_mni_beng
+    task_alias: mni_beng
+  - task: mrl_gen_nag_latn
+    task_alias: nag_latn
+  - task: mrl_gen_nld_latn
+    task_alias: nld_latn
+  - task: mrl_gen_nno_latn
+    task_alias: nno_latn
+  - task: mrl_gen_nob_latn
+    task_alias: nob_latn
+  - task: mrl_gen_npi_deva
+    task_alias: npi_deva
+  - task: mrl_gen_pcm_latn
+    task_alias: pcm_latn
+  - task: mrl_gen_pes_arab
+    task_alias: pes_arab
+  - task: mrl_gen_pol_latn
+    task_alias: pol_latn
+  - task: mrl_gen_por_latn_braz
+    task_alias: por_latn_braz
+  - task: mrl_gen_por_latn_port
+    task_alias: por_latn_port
+  - task: mrl_gen_ron_latn
+    task_alias: ron_latn
+  - task: mrl_gen_rwr_deva
+    task_alias: rwr_deva
+  - task: mrl_gen_sin_sinh
+    task_alias: sin_sinh
+  - task: mrl_gen_slk_latn
+    task_alias: slk_latn
+  - task: mrl_gen_slk_latn_sari
+    task_alias: slk_latn_sari
+  - task: mrl_gen_slv_latn
+    task_alias: slv_latn
+  - task: mrl_gen_slv_latn_cerk
+    task_alias: slv_latn_cerk
+  - task: mrl_gen_snd_arab
+    task_alias: snd_arab
+  - task: mrl_gen_snd_deva
+    task_alias: snd_deva
+  - task: mrl_gen_spa_latn_peru
+    task_alias: spa_latn_peru
+  - task: mrl_gen_srp_cyrl
+    task_alias: srp_cyrl
+  - task: mrl_gen_srp_latn
+    task_alias: srp_latn
+  - task: mrl_gen_swe_latn
+    task_alias: swe_latn
+  - task: mrl_gen_tam_taml
+    task_alias: tam_taml
+  - task: mrl_gen_tgl_latn
+    task_alias: tgl_latn
+  - task: mrl_gen_tha_thai
+    task_alias: tha_thai
+  - task: mrl_gen_tur_latn
+    task_alias: tur_latn
+  - task: mrl_gen_uig_arab
+    task_alias: uig_arab
+  - task: mrl_gen_ukr_cyrl
+    task_alias: ukr_cyrl
+  - task: mrl_gen_urd_arab
+    task_alias: urd_arab
+  - task: mrl_gen_urd_latn
+    task_alias: urd_latn
+  - task: mrl_gen_urh_latn
+    task_alias: urh_latn
+  - task: mrl_gen_uzn_latn
+    task_alias: uzn_latn
+  - task: mrl_gen_vie_latn
+    task_alias: vie_latn
+  - task: mrl_gen_yor_latn
+    task_alias: yor_latn
+  - task: mrl_gen_yue_hant
+    task_alias: yue_hant
+  - task: mrl_gen_zsm_latn
+    task_alias: zsm_latn
+  - task: mrl_gen_zul_latn
+    task_alias: zul_latn
+aggregate_metric_list:
+  - metric: exact_match
+    aggregation: mean
+    weight_by_size: true
+metadata:
+  version: 1.0
