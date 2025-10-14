@@ -18,14 +18,14 @@ if __name__ == "__main__":
             f.write(f"task: {s}\n")
             f.write(f"dataset_name: {s}\n")
 
-with open(PARENT / "_global_piqa_gen.yaml", "w") as f:
-    f.write("group: global_piqa_gen\n")
-    f.write("task:\n")
-    for s in subsets:
-        f.write(f"  - task: {s}\n")
-    f.write("aggregate_metric_list:\n")
-    f.write("  - metric: exact_match\n")
-    f.write("    aggregation: mean\n")
-    f.write("    weight_by_size: true\n")
-    f.write("metadata:\n")
-    f.write("  version: 1.0\n")
+    with open(PARENT / "_global_piqa_gen.yaml", "w") as f:
+        f.write("group: global_piqa_gen\n")
+        f.write("task:\n")
+        for s in subsets:
+            f.write(f"  - task: {s}\n")
+        f.write("aggregate_metric_list:\n")
+        f.write("  - metric: exact_match\n")
+        f.write("    aggregation: mean\n")
+        f.write("    weight_by_size: true\n")
+        f.write("metadata:\n")
+        f.write("  version: 1.0\n")
