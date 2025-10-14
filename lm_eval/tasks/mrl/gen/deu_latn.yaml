@@ -1,0 +1,3 @@
+include: '_template'
+task: mrl_gen_deu_latn
+dataset_name: deu_latn
