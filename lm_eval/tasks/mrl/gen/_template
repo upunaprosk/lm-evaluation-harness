@@ -7,7 +7,6 @@ generation_kwargs:
   do_sample: true
   temperature: 0.8
   top_p: 0.95
-  repetition_penalty: 1.1
   max_gen_toks: 2048
   until: [ ]
 filter_list:
