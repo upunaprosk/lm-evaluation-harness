@@ -15,15 +15,14 @@ if __name__ == "__main__":
     for s in subsets:
         with open(PARENT / f"{s}.yaml", "w") as f:
             f.write("include: '_template'\n")
-            f.write(f"task: mrl_gen_{s}\n")
+            f.write(f"task: {s}\n")
             f.write(f"dataset_name: {s}\n")
 
 with open(PARENT / "_global_piqa_gen.yaml", "w") as f:
     f.write("group: global_piqa_gen\n")
     f.write("task:\n")
     for s in subsets:
-        f.write(f"  - task: mrl_gen_{s}\n")
-        f.write(f"    task_alias: {s}\n")
+        f.write(f"  - task: {s}\n")
     f.write("aggregate_metric_list:\n")
     f.write("  - metric: exact_match\n")
     f.write("    aggregation: mean\n")

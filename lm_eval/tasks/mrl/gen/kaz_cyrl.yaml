@@ -1,3 +1,3 @@
 include: '_template'
-task: mrl_gen_kaz_cyrl
+task: kaz_cyrl
 dataset_name: kaz_cyrl

@@ -1,3 +1,3 @@
 include: '_template'
-task: mrl_gen_ckm_latn
+task: ckm_latn
 dataset_name: ckm_latn

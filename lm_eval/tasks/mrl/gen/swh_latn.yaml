@@ -1,3 +1,3 @@
 include: '_template'
-task: mrl_gen_swh_latn
+task: swh_latn
 dataset_name: swh_latn

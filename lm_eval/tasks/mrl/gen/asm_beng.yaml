@@ -1,3 +1,3 @@
 include: '_template'
-task: mrl_gen_asm_beng
+task: asm_beng
 dataset_name: asm_beng

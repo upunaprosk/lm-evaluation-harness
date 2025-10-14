@@ -1,3 +1,3 @@
 include: '_template'
-task: mrl_gen_mal_mlym
+task: mal_mlym
 dataset_name: mal_mlym

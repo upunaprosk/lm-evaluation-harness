@@ -1,3 +1,3 @@
 include: '_template'
-task: mrl_gen_uzn_latn
+task: uzn_latn
 dataset_name: uzn_latn

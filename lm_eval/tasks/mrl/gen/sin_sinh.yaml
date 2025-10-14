@@ -1,3 +1,3 @@
 include: '_template'
-task: mrl_gen_sin_sinh
+task: sin_sinh
 dataset_name: sin_sinh

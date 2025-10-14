@@ -1,3 +1,3 @@
 include: '_template'
-task: mrl_gen_slv_latn_cerk
+task: slv_latn_cerk
 dataset_name: slv_latn_cerk
