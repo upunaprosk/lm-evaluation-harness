@@ -5,7 +5,9 @@ doc_to_text: "Given the following situation, which option is more likely to be c
 doc_to_target: "{{['A', 'B'][label]}}"
 generation_kwargs:
   do_sample: true
-  temperature: 1
+  temperature: 0.8
+  top_p: 0.95
+  repetition_penalty: 1.1
   max_gen_toks: 2048
   until: [ ]
 filter_list:
