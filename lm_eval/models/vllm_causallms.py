@@ -286,21 +286,20 @@ class VLLM(TemplateLM):
         max_l = (
             8096
             if (
-                isinstance(self._max_length_internal, int)
-                and self._max_length_internal > 8096
+                isinstance(self.max_length_internal, int)
+                and self.max_length_internal > 8096
             )
-            else self._max_length
+            else self._DEFAULT_MAX_LENGTH
         )
         assert isinstance(max_l, int)
         return max_l
 
     @property
-    def _max_length_internal(self):
+    def max_length_internal(self):
         if self._max_length:  # if max length manually set, return it
             return self._max_length
         if self.data_parallel_size <= 1:
-            if max_l := self.model.llm_engine.model_config.max_model_len:
-                return max_l
+            return self.model.llm_engine.model_config.max_model_len
         else:
             seqlen_config_attrs = ("n_positions", "max_position_embeddings", "n_ctx")
             for attr in seqlen_config_attrs:
