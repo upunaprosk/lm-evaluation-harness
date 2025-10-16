@@ -283,11 +283,16 @@ class VLLM(TemplateLM):
 
     @property
     def max_length(self):
-        return (
+        max_l = (
             8096
-            if self._max_length_internal and self._max_length_internal > 8096
+            if (
+                isinstance(self._max_length_internal, int)
+                and self._max_length_internal > 8096
+            )
             else self._max_length
         )
+        assert isinstance(max_l, int)
+        return max_l
 
     @property
     def _max_length_internal(self):
