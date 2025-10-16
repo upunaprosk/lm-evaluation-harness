@@ -111,7 +111,7 @@ def _vllm_mp_worker(
 
 @register_model("vllm")
 class VLLM(TemplateLM):
-    _DEFAULT_MAX_LENGTH = 2048
+    _DEFAULT_MAX_LENGTH = 4096
 
     def __init__(
         self,
@@ -283,14 +283,19 @@ class VLLM(TemplateLM):
 
     @property
     def max_length(self):
-        return 8096 if self._max_length_internal > 8096 else self._max_length
+        return (
+            8096
+            if self._max_length_internal and self._max_length_internal > 8096
+            else self._max_length
+        )
 
     @property
     def _max_length_internal(self):
         if self._max_length:  # if max length manually set, return it
             return self._max_length
         if self.data_parallel_size <= 1:
-            return self.model.llm_engine.model_config.max_model_len
+            if max_l := self.model.llm_engine.model_config.max_model_len:
+                return max_l
         else:
             seqlen_config_attrs = ("n_positions", "max_position_embeddings", "n_ctx")
             for attr in seqlen_config_attrs:
