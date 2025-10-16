@@ -283,6 +283,10 @@ class VLLM(TemplateLM):
 
     @property
     def max_length(self):
+        return 8096 if self._max_length > 8096 else self._max_length
+
+    @property
+    def _max_length(self):
         if self._max_length:  # if max length manually set, return it
             return self._max_length
         if self.data_parallel_size <= 1:
@@ -627,13 +631,9 @@ class VLLM(TemplateLM):
 
                 # set the max length in tokens of inputs ("context_enc")
                 # max len for inputs = max length, minus room to generate the max new tokens
-                max_ctx_len = self.max_length - max_gen_toks
-                if len(x) > max_ctx_len:
-                    eval_logger.warning(
-                        f"Context length {len(x)} exceeds max length (context + max gen tokens): {max_ctx_len}. Truncating context."
-                    )
-                    context_encoding_truncated.append(x[-max_ctx_len:])
-                else:
+                default_length = len(x) + max_gen_toks
+                if default_length > self.max_length:
+                    max_gen_toks = self.max_length - len(x)
                     context_encoding_truncated.append(x)
                 # create sampling params
                 kwargs = self.modify_gen_kwargs(kwargs)
