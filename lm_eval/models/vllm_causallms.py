@@ -283,10 +283,10 @@ class VLLM(TemplateLM):
 
     @property
     def max_length(self):
-        return 8096 if self._max_length > 8096 else self._max_length
+        return 8096 if self._max_length_internal > 8096 else self._max_length
 
     @property
-    def _max_length(self):
+    def _max_length_internal(self):
         if self._max_length:  # if max length manually set, return it
             return self._max_length
         if self.data_parallel_size <= 1:
