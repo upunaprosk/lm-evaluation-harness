@@ -643,6 +643,9 @@ class VLLM(TemplateLM):
                 default_length = len(x) + max_gen_toks
                 if default_length > self.max_length:
                     max_gen_toks = self.max_length - len(x)
+                    if max_gen_toks < 1:
+                        x = x[-(self.max_length - 1) :]
+                        max_gen_toks = 1
                 context_encoding_truncated.append(x)
                 # create sampling params
                 kwargs = self.modify_gen_kwargs(kwargs)
