@@ -285,11 +285,11 @@ class VLLM(TemplateLM):
     def max_length(self):
         if self._max_length:
             return self._max_length
-        elif (
-            isinstance(self.max_length_internal, int)
-            and self.max_length_internal > 8096
-        ):
-            return 8096
+        elif isinstance(len_internal := self.max_length_internal, int):
+            if len_internal > 8096:
+                return 8096
+            else:
+                return len_internal
         else:
             return self._DEFAULT_MAX_LENGTH
 
