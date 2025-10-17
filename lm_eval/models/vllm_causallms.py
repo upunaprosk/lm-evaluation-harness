@@ -25,6 +25,7 @@ from lm_eval.models.utils import (
     bos_already_added,
     configure_pad_token,
     handle_stop_sequences,
+    maybe_truncate,
     postprocess_generated_text,
     undistribute,
 )
@@ -639,12 +640,10 @@ class VLLM(TemplateLM):
 
                 # set the max length in tokens of inputs ("context_enc")
                 # max len for inputs = max length, minus room to generate the max new tokens
-                default_length = len(x) + max_gen_toks
-                if default_length > self.max_length:
-                    max_gen_toks = self.max_length - len(x)
-                    if max_gen_toks < 1:
-                        x = x[-(self.max_length - 1) :]
-                        max_gen_toks = 1
+                # reduce max gen tokens up to min, left truncate prompt if needed
+                x, max_gen_toks = maybe_truncate(
+                    x, max_gen_toks, self.max_length, min_gen_toks=1
+                )
                 context_encoding_truncated.append(x)
                 # create sampling params
                 kwargs = self.modify_gen_kwargs(kwargs)
