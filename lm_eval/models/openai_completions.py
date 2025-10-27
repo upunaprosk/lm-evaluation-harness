@@ -123,7 +123,15 @@ class LocalCompletionsAPI(TemplateAPI):
 
     @staticmethod
     def parse_generations(outputs: Union[Dict, List[Dict]], **kwargs) -> List[str]:
-        return [""] * len(outputs)
+        res = []
+        if not isinstance(outputs, list):
+            outputs = [outputs]
+        for out in outputs:
+            tmp = [None] * len(out["choices"])
+            for choices in out["choices"]:
+                tmp[choices["index"]] = choices["text"]
+            res = res + tmp
+        return res
 
     @property
     def api_key(self):
@@ -142,6 +150,8 @@ class LocalChatCompletion(LocalCompletionsAPI):
     def __init__(
         self,
         base_url=None,
+        tokenizer_backend=None,
+        tokenized_requests=None,
         verify_certificate=True,
         ca_cert_path=None,
         auth_token=None,
@@ -149,8 +159,8 @@ class LocalChatCompletion(LocalCompletionsAPI):
     ):
         super().__init__(
             base_url=base_url,
-            tokenizer_backend=None,
-            tokenized_requests=None,
+            tokenizer_backend=tokenizer_backend,
+            tokenized_requests=tokenized_requests,
             verify_certificate=verify_certificate,
             ca_cert_path=ca_cert_path,
             auth_token=auth_token,
@@ -290,7 +300,6 @@ class OpenAIChatCompletion(LocalChatCompletion):
             raise ValueError(
                 "API key not found. Please set the `OPENAI_API_KEY` environment variable."
             )
-            return None
         return key
 
     def loglikelihood(self, requests, **kwargs):
@@ -328,9 +337,12 @@ class OpenAIChatCompletion(LocalChatCompletion):
             "seed": seed,
             **gen_kwargs,
         }
-        if "o1" in self.model or "5" in self.model:
+        if (
+            "o1" in self.model
+            or "5" in self.model
+            or "o3" in self.model
+            or "o4" in self.model
+        ):
             output.pop("stop")
             output["temperature"] = 1
-        elif "o3" in self.model:
-            output.pop("temperature")
         return output
