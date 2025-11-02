@@ -28,7 +28,7 @@ def filter_race_color(dataset: datasets.Dataset) -> datasets.Dataset:
     return filter_dataset(dataset, "race-color")
 
 
-def filter_socio(dataset: datasets.Dataset) -> datasets.Dataset:
+def filter_socioeconomic(dataset: datasets.Dataset) -> datasets.Dataset:
     return filter_dataset(dataset, "socioeconomic")
 
 
@@ -48,7 +48,7 @@ def filter_disability(dataset: datasets.Dataset) -> datasets.Dataset:
     return filter_dataset(dataset, "disability")
 
 
-def filter_orientation(dataset: datasets.Dataset) -> datasets.Dataset:
+def filter_sexual_orientation(dataset: datasets.Dataset) -> datasets.Dataset:
     return filter_dataset(dataset, "sexual-orientation")
 
 
@@ -56,9 +56,12 @@ def filter_nationality(dataset: datasets.Dataset) -> datasets.Dataset:
     return filter_dataset(dataset, "nationality")
 
 
-def filter_appearance(dataset: datasets.Dataset) -> datasets.Dataset:
+def filter_physical_appearance(dataset: datasets.Dataset) -> datasets.Dataset:
     return filter_dataset(dataset, "physical-appearance")
 
+
+def filter_autre(dataset: datasets.Dataset) -> datasets.Dataset:
+    return filter_dataset(dataset, "other")
 
 def filter_autre(dataset: datasets.Dataset) -> datasets.Dataset:
     return filter_dataset(dataset, "other")
