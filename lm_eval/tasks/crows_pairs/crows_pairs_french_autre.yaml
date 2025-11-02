@@ -1,3 +1,4 @@
+# Generated automatically
 include: crows_pairs_french.yaml
+process_docs: '!function utils.filter_autre'
 task: crows_pairs_french_autre
-process_docs: !function utils.filter_autre

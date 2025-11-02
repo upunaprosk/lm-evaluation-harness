@@ -1,0 +1,4 @@
+# Generated automatically
+include: crows_pairs_spanish.yaml
+process_docs: '!function utils.filter_religion'
+task: crows_pairs_spanish_religion

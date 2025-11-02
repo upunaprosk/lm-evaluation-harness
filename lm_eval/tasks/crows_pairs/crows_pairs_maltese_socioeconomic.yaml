@@ -1,0 +1,4 @@
+# Generated automatically
+include: crows_pairs_maltese.yaml
+process_docs: '!function utils.filter_socioeconomic'
+task: crows_pairs_maltese_socioeconomic

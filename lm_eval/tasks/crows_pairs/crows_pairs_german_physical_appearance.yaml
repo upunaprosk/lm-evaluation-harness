@@ -1,0 +1,4 @@
+# Generated automatically
+include: crows_pairs_german.yaml
+process_docs: '!function utils.filter_physical_appearance'
+task: crows_pairs_german_physical_appearance

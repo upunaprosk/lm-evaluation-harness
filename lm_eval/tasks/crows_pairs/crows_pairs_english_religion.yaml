@@ -1,3 +1,4 @@
+# Generated automatically
 include: crows_pairs_english.yaml
+process_docs: '!function utils.filter_religion'
 task: crows_pairs_english_religion
-process_docs: !function utils.filter_religion

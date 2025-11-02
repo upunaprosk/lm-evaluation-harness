@@ -1,3 +1,4 @@
+# Generated automatically
 include: crows_pairs_english.yaml
+process_docs: '!function utils.filter_socioeconomic'
 task: crows_pairs_english_socioeconomic
-process_docs: !function utils.filter_socio

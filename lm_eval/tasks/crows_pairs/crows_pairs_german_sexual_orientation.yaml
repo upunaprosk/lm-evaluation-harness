@@ -1,0 +1,4 @@
+# Generated automatically
+include: crows_pairs_german.yaml
+process_docs: '!function utils.filter_sexual_orientation'
+task: crows_pairs_german_sexual_orientation

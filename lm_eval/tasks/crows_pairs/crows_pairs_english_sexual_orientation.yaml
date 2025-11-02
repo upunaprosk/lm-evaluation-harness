@@ -1,3 +1,4 @@
+# Generated automatically
 include: crows_pairs_english.yaml
+process_docs: '!function utils.filter_sexual_orientation'
 task: crows_pairs_english_sexual_orientation
-process_docs: !function utils.filter_orientation

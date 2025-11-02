@@ -1,0 +1,4 @@
+# Generated automatically
+dataset_name: es
+include: crows_pairs_english.yaml
+task: crows_pairs_spanish

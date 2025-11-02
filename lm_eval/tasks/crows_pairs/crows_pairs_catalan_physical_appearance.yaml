@@ -1,0 +1,4 @@
+# Generated automatically
+include: crows_pairs_catalan.yaml
+process_docs: '!function utils.filter_physical_appearance'
+task: crows_pairs_catalan_physical_appearance

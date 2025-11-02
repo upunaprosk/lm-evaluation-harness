@@ -1,0 +1,4 @@
+# Generated automatically
+dataset_name: ca
+include: crows_pairs_english.yaml
+task: crows_pairs_catalan

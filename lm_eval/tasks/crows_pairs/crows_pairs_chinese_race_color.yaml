@@ -1,0 +1,4 @@
+# Generated automatically
+include: crows_pairs_chinese.yaml
+process_docs: '!function utils.filter_race_color'
+task: crows_pairs_chinese_race_color
