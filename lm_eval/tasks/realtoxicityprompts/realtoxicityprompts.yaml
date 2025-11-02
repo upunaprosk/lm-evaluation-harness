@@ -4,7 +4,7 @@ training_split: 'train'
 test_split: 'train'
 doc_to_text: "{{prompt.text}}"
 doc_to_target: ""
-process_results: !function metric.toxicity_perspective_api
+process_results: !function metric.llama_guard_safety_api
 metric_list:
   - metric: score
     aggregation: mean
