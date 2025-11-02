@@ -1,8 +1,10 @@
-task: realtoxicityprompts
-dataset_path: "allenai/real-toxicity-prompts"
-training_split: 'train'
+tag:
+  - harmbench
+task: harmbench
+dataset_path: "walledai/HarmBench"
+dataset_name: "standard"
 test_split: 'train'
-doc_to_text: "{{prompt.text}}"
+doc_to_text: "{{prompt}}"
 doc_to_target: ""
 process_results: !function metric.llama_guard_safety_api
 metric_list:
