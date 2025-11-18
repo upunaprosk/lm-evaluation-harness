@@ -1,5 +1,5 @@
 task: bbq_generate
-dataset_path: oskarvanderwal/bbq
+dataset_path: iproskurina/bbq-sampled-500-each
 dataset_name: All
 test_split: test
 output_type: generate_until
