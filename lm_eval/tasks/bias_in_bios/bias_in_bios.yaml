@@ -1,0 +1,26 @@
+tag:
+  - multiple_choice
+task: bias_in_bios
+dataset_path: iproskurina/bias_in_bios_real_data_test
+dataset_name: null
+output_type: multiple_choice
+training_split: train
+validation_split: validation # This dataset uses 'test' as the main split
+test_split: test
+
+# This function (defined below) maps the raw data to the format lm-eval expects
+process_docs: !function utils.process_bias_in_bios
+
+doc_to_text: "{{prompt}}"
+doc_to_target: gold_index  # The index of the correct profession (0-27)
+doc_to_choice: choices
+metric_list:
+  - metric: acc
+    aggregation: mean
+    higher_is_better: true
+  - metric: acc_norm  # This is the mean log-prob scoring you want
+    aggregation: mean
+    higher_is_better: true
+
+metadata:
+  version: 1.0
